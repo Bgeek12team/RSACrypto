@@ -1,0 +1,99 @@
+﻿<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>Проект "Криптография". Данное приложение позволяет Вам зашифровать любой текст.
+Все, что требуется от пользователя:
+1)Окно "Шифруемое слово".
+Справа от надписи "Шифруемое слово" пользователю необходимо ввести любой текст, который он хотел бы зашифровать. 
+Количество символов ограничено размером текстбокса.
+2)Кнопка "Зашифровать" и окно шифра
+При нажатии на эту кнопку, пользователь увидит зашифрованное приложением сообщение.
+3)Кнопка "Расшифровать" и окно расшифрованного сообщения
+После того, как пользователь кликнет на кнопку "Расшифровать", он увидит, что сообщение которое он шифровал успешно было расшифровано.
+4)Открытый, Приватный ключи и Параметры шифрования
+Эти элементы управления показывают все скрытые от мошенников параметры шифра, с помощью которых приложение и шифрует сообщение пользователя.
+
+Приятного пользования!</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DgAACw4BQL7hQQAAA/dJREFUaEPtmUerFEEURkfMKOa01KUo6q8wYHZn2im6MaBuDTvjShD8HYqIioqg
+        Yg4bsyvDQtSdCRX9TjMXin7dM9NVd3rmPd4Hh5nurr5d1VV169btxrCGsKaJdeKkuCBeiK/iVxP+Pxdc
+        o8xaMVX0hcaJreKy+Cv+VeSPuCS2iLGido0X+8VHYZX6Ka6Jg4KemS9446Ob8J9zXDskrgvusfs/iH2C
+        l1OLVoq3wipwX2wTk0VVTRHbxQNh9t6IFaJr4k2dFfbAh2Kp8NJy8ViY/TPCvXfmCCrOA76JXWKk8BY2
+        94jvgmfR27OFi+YJuhvDeJ2FottaJF4KnvlaUIckzRRm8J6YIeoSzuGm4NnMSUZFlBifNpxuiwmibvHM
+        O4I6MMyi5oxNbIYTi11VjRHHBS4a13qsea6qpgsbFTiASsLFciMTO3ZOUHFshHAuRswZcwB4t47EYmfr
+        BN4pVvRC2AjgXKz2Cmww+TsaYgcENzA/Ulysd0NGiScCOzSqpWiphR2pi13R0DoqUsSKj533omVsRvBG
+        QTxEqpjYNIZegNjJHmqEME+6iRNluiIoROzUr9ohqOPF7KhAuFjCaiLSmACwLrFQsr/5LQrruV7Q0qvZ
+        UX/rhqCuq7OjnE4JLrKf6HcdEdT1RHaUE1tQLq7JjtKEnSK8ZKPnXHaU0yvBRXZxqQorH+KlBQJ75AUG
+        6IvgYkxcVaawEeAlonDsfcqOcsITcDHV14cKGwFeYjHEHh52gIZMQwbT0GLDh73CoeU52U1hI8BLLSe7
+        uV8ygF4KGwFe2iCwV+h+bUEkeealsBHgpZYLIhlALpIt9FLYCPCShSirsqOcCMYsaCQD6KFuNARnZEHj
+        JE4UiYQyDySN6aFuNGSnwBZzulSbBYXIxXoobASkio3VI4GtjZwoEwsN20gKLuNEosJGQKqYE9h5J9p+
+        hiC1T2FanprfDRsBKSL58FRgZzcn2okEhOV6SSjHKKx8ETGyF0yyrm1vmCxbQVKM5FhVhZUuoqqWiB+C
+        eytnd0hPciNvgLRlr0RcRVKOupzmRFUxxEgLYYBEci+S2BPFXUEd+O14SOXF2yAwwxCfFTiuSyx8twTP
+        Zs4mf/DhI4t1LcNssei2mBP2TKLyucJFvA0bZjgAcq+4Q29hE+9kE5vhNEu4ijljDgBIKHt9fWXF5lOG
+        rRPAxI6eE52I7xPW7UAuljQmQWdVMQ+InSzsAIaS59filqJ3GF4WzgARKeH1YUHeiV0cbpscAPCfj0Zs
+        iihDWcsTAGEHK3ZXe6FMPJSsOAlltgBWqU4hFCeKJQDsSQOKREKZXCy7tvOCb4+fBW8d+P9MsD2lDGVL
+        9xPDGtxqNP4DUFp9NZn1PzsAAAAASUVORK5CYII=
+</value>
+  </data>
+</root>
