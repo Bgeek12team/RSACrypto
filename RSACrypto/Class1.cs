@@ -297,34 +297,35 @@ namespace RSACrypto
                 MyBigInteger res = new MyBigInteger();
                 if (value2.Length > value1.Length || value2.Length == 0)
                     return new();
-                for (int i = 1; i <= value1.Length; i++)
+            for (int i = 1; i <= value1.Length; i++)
+            {
+                if (BigInteger.Parse(value1.Substring(0, i)) >= BigInteger.Parse(value2) && remains == 0)
                 {
-                    if (BigInteger.Parse(value1.Substring(0, i)) >= BigInteger.Parse(value2) && remains == 0)
+                    if (BigInteger.Divide(BigInteger.Parse(value1), BigInteger.Parse(value2)) > 0)
                     {
-                        if (BigInteger.Divide(BigInteger.Parse(value1), BigInteger.Parse(value2)) > 0)
+                        if (result == "")
                         {
-                            if (result == "")
-                            {
-                                result += BigInteger.Divide(BigInteger.Parse(value1.Substring(0, i)), BigInteger.Parse(value2));
-                                BigInteger t = BigInteger.Divide(BigInteger.Parse(value1.Substring(0, i)), BigInteger.Parse(value2));
-                                remains = (t * (BigInteger.Parse(value2)));
-                                remains = BigInteger.Parse(value1.Substring(0, i)) - remains;
-                            }
-                            else if (remains == 0 && BigInteger.Divide(BigInteger.Parse(value1.Substring(i - 1, 1)), BigInteger.Parse(value2)) > 0)
-                            {
-                                remains += BigInteger.Parse(value1.Substring(i - 1, 1));
-                                result += BigInteger.Divide(remains, BigInteger.Parse(value2));
-                                continue;
-                            }
-                            else
-                            {
-                                result += "0";
-                                remains += BigInteger.Parse(value1.Substring(i - 1, 1));
+                            result += BigInteger.Divide(BigInteger.Parse(value1.Substring(0, i)), BigInteger.Parse(value2));
+                            BigInteger t = BigInteger.Divide(BigInteger.Parse(value1.Substring(0, i)), BigInteger.Parse(value2));
+                            remains = (t * (BigInteger.Parse(value2)));
+                            remains = BigInteger.Parse(value1.Substring(0, i)) - remains;
+                        }
+                        else if (remains == 0 && BigInteger.Divide(BigInteger.Parse(value1.Substring(i - 1, 1)), BigInteger.Parse(value2)) > 0)
+                        {
+                            remains += BigInteger.Parse(value1.Substring(i - 1, 1));
+                            result += BigInteger.Divide(remains, BigInteger.Parse(value2));
+                            remains -= BigInteger.Parse(value2) * BigInteger.Divide(remains, BigInteger.Parse(value2));
+                            continue;
+                        }
+                        else
+                        {
+                            result += "0";
+                            remains += BigInteger.Parse(value1.Substring(i - 1, 1));
 
-                            }
                         }
                     }
-                    else if (remains != 0)
+                }
+                else if (remains != 0)
                     {
                         str = remains.ToString() + BigInteger.Parse(value1.Substring(i - 1, 1));
                         if (BigInteger.Divide(BigInteger.Parse(str), BigInteger.Parse(value2)) < 1)
