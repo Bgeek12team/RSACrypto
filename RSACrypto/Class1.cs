@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace RSACrypto
 {
-    namespace DividersProject
-    {
+    
         /// <summary>
         /// Класс, позволяющий осуществлять работу с большими числами,
         /// которые представляются в памяти в виде строк
@@ -297,7 +296,7 @@ namespace RSACrypto
                 }
                 MyBigInteger res = new MyBigInteger();
                 if (value2.Length > value1.Length || value2.Length == 0)
-                    return default;
+                    return new();
                 for (int i = 1; i <= value1.Length; i++)
                 {
                     if (BigInteger.Parse(value1.Substring(0, i)) >= BigInteger.Parse(value2) && remains == 0)
@@ -1091,5 +1090,5 @@ namespace RSACrypto
                 return new string(chars);
             }
         }
-    }
+    
 }

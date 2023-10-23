@@ -1,4 +1,4 @@
-﻿using RSACrypto.DividersProject;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,9 +80,9 @@ namespace RSACrypto
         /// <returns>Значение закрытой экспоненты</returns>
         public MyBigInteger generatePrivateExp()
         {
-            MyBigInteger e = generatePublicExp();
-            MyBigInteger fi = calcEulerFunc();
-            MyBigInteger d = Extendedgcd(e, fi).x;
+            long e = (long)generatePublicExp();
+            long fi = (long)calcEulerFunc();
+            MyBigInteger d = new(Extendedgcd(e, fi).x);
             if (d < 0)
                 return d + fi;
             else return d;
@@ -98,10 +98,11 @@ namespace RSACrypto
         /// первое число,
         /// второе число
         /// </returns>
-        private (MyBigInteger gcd, MyBigInteger x, MyBigInteger y) Extendedgcd(MyBigInteger a, MyBigInteger b)
+        private (long gcd, long x, long y) Extendedgcd(long a, long b)
         {
-            MyBigInteger gcd, x, y, x1, y1;
-            if (b == 0) return (a, new(1), new());
+            long gcd, x, y, x1, y1;
+            if (b == 0) 
+                return (a, 1, 0);
             (gcd, x1, y1) = Extendedgcd(b, a % b);
             x = y1;
             y = x1 - (a / b) * y1;
@@ -243,7 +244,8 @@ namespace RSACrypto
             foreach (char character in message.ToCharArray())
             {
                 MyBigInteger charValue = new((long)character);
-                MyBigInteger encryptedCharValue = Ariphmetics.ModularExp(charValue, publicKey.getPublicExp(), publicKey.getN());
+                MyBigInteger encryptedCharValue 
+                    = Ariphmetics.ModularExp(charValue, publicKey.getPublicExp(), publicKey.getN());
                 encryptedMessage.Append(encryptedCharValue).Append(" ");
             }
 
@@ -289,7 +291,8 @@ namespace RSACrypto
                 if (!string.IsNullOrWhiteSpace(encryptedValue))
                 {
                     MyBigInteger encryptedCharValue = MyBigInteger.Parse(encryptedValue);
-                    MyBigInteger decryptedCharValue = Ariphmetics.ModularExp(encryptedCharValue, privateKey.getPrivateExp(), privateKey.getN());
+                    MyBigInteger decryptedCharValue = Ariphmetics.ModularExp(encryptedCharValue,
+                        privateKey.getPrivateExp(), privateKey.getN());
                     char decryptedChar = (char)(int)decryptedCharValue;
                     decryptedMessage.Append(decryptedChar);
                 }
@@ -311,11 +314,11 @@ namespace RSACrypto
         /// <summary>
         /// Начало отрезка, на котором мы выбираем простые числа
         /// </summary>
-        readonly MyBigInteger from = new(100);
+        readonly MyBigInteger from = new(10);
         /// <summary>
         /// Конец отрезка, для выбора простых чисел
         /// </summary>
-        readonly MyBigInteger to = new(3000);
+        readonly MyBigInteger to = new(20);
 
         MyBigInteger p;
         MyBigInteger q;

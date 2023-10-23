@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,7 +17,7 @@ namespace RSACrypto
         /// <summary>
         /// Поле - сдвиг
         /// </summary>
-        private int k;
+        private MyBigInteger k;
         /// <summary>
         /// Полк - шифруемое сообщение
         /// </summary>
@@ -27,7 +28,7 @@ namespace RSACrypto
         /// </summary>
         /// <param name="k">Сдвиг</param>
         /// <param name="message">Сообщение в формате строки</param>
-        public StringEncryptorCaesar(int k, string message)
+        public StringEncryptorCaesar(MyBigInteger k, string message)
         {
             this.message = message;
             this.k = k;
@@ -57,7 +58,7 @@ namespace RSACrypto
         /// <summary>
         /// Поле - сдвиг в шифре Цезаря
         /// </summary>
-        private int offset;
+        private MyBigInteger offset;
         /// <summary>
         /// Поле - расшировываемое сообщение
         /// </summary>
@@ -68,7 +69,7 @@ namespace RSACrypto
         /// </summary>
         /// <param name="offset">Cдвиг в шифре Цезаря</param>
         /// <param name="message">Зашифрованное сообщение</param>
-        public StringDecryptorCaesar(int offset, string encryptedMessage)
+        public StringDecryptorCaesar(MyBigInteger offset, string encryptedMessage)
         {
             this.encryptedMessage = encryptedMessage;
             this.offset = offset;
@@ -101,9 +102,9 @@ namespace RSACrypto
         /// <summary>
         /// Сдвиг в шифре Цезаря
         /// </summary>
-        private int offset;
+        private MyBigInteger offset;
 
-        public CryptoProcessCaesar(string message, int offset)
+        public CryptoProcessCaesar(string message, MyBigInteger offset)
         {
             this.message = message;
             this.offset = offset;

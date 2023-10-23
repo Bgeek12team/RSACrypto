@@ -8,7 +8,7 @@ namespace Interface
         CryptoProcessRSA cp;
         CryptoProcessCaesar cpc;
         CryptoProcessTransposition cpt;
-        int keyVal = -1;
+        MyBigInteger keyVal = new(-1);
         public enum CYPHER_TYPES { RSA, CESAURUS, INSERTION}
         public CYPHER_TYPES DefineType()
         {
@@ -43,7 +43,7 @@ namespace Interface
         {
             try
             {
-                this.keyVal = Convert.ToInt32(key.Text);
+                this.keyVal = MyBigInteger.Parse(key.Text);
                 return true;
             } catch
             {
@@ -78,11 +78,11 @@ namespace Interface
                     throw new Exception();
                 }    
 
-                this.keyVal = Convert.ToInt32(key.Text);
+                this.keyVal = MyBigInteger.Parse(key.Text);
             }
             catch
             {
-                keyVal = -1;
+                keyVal = new(-1);
 
                 errorProvider1.SetError(key, "Некорректный ввод!");
                 return;
