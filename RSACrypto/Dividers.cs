@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RSACrypto.DividersProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace RSACrypto
         /// True: n - делитель d,
         /// False: n - не делитель d
         /// </returns>
-        public static bool IsDivider(long n, long d)
+        public static bool IsDivider(MyBigInteger n, MyBigInteger d)
         {
             return n % d == 0;
         }
@@ -35,12 +36,12 @@ namespace RSACrypto
         /// массив целочисленных положительных делителей
         /// и массив целочисленных положительных степеней соответсвующих делителей
         /// </returns>
-        public static (long[], long[]) Factorize(long n)
+        public static (MyBigInteger[], MyBigInteger[]) Factorize(MyBigInteger n)
         {
 
-            List<long> dividers = new List<long>();
-            List<long> powers = new List<long>();
-            long[] primes = AllPrimes(2, n);
+            List<MyBigInteger> dividers = new List<MyBigInteger>();
+            List<MyBigInteger> powers = new List<MyBigInteger>();
+            MyBigInteger[] primes = AllPrimes(new(2), n);
             long i = 0;
             int k = 0;
             while (n > 1)
@@ -48,7 +49,7 @@ namespace RSACrypto
                 if (n % primes[i] == 0)
                 {
                     dividers.Add(primes[i]);
-                    powers.Add(0);
+                    powers.Add(new(0));
                     while (n % primes[i] == 0)
                     {
                         powers[k]++;
@@ -69,7 +70,7 @@ namespace RSACrypto
         /// True: число простое
         /// False: число составное
         /// </returns>
-        public static bool IsPrime(long n)
+        public static bool IsPrime(MyBigInteger n)
         {
             return AllDividers(n).Length == 2;
         }
@@ -82,11 +83,11 @@ namespace RSACrypto
         /// в диапозоне от 1 до Int.MaxValue
         /// </param>
         /// <returns>Массив всех делителей числа</returns>
-        public static long[] AllDividers(long n)
+        public static MyBigInteger[] AllDividers(MyBigInteger n)
         {
-            List<long> result = new List<long>();
+            List<MyBigInteger> result = new List<MyBigInteger>();
 
-            for (int i = 1; i <= Math.Sqrt(n); i++)
+            for (MyBigInteger i = new(1); i <= MyBigInteger.Sqrt(n); i++)
             {
                 if (Dividers.IsDivider(n, i))
                 {
@@ -113,19 +114,19 @@ namespace RSACrypto
         /// натуральное число от n до Int.MaxValue,
         /// </param>
         /// <returns>Массив простых чисел на отрезке [d; n]</returns>
-        public static long[] AllPrimes(long d, long n)
+        public static MyBigInteger[] AllPrimes(MyBigInteger d, MyBigInteger n)
         {
-            List<long> numbers = new List<long>();
-            bool[] isNotPrime = new bool[n + 1];
+            List<MyBigInteger> numbers = new List<MyBigInteger>();
+            bool[] isNotPrime = new bool[(int)n + 1];
             for (int j = 2; j * j <= n; j++)
             {
                 if (!isNotPrime[j])
                     for (int i = j * j; i <= n; i += j)
                         isNotPrime[i] = true;
             }
-            long start = d >= 2 ? d : 2;
-            for (long i = start; i <= n; i++)
-                if (!isNotPrime[i])
+            MyBigInteger start = d >= 2 ? d : new MyBigInteger(2);
+            for (MyBigInteger i = start; i <= n; i++)
+                if (!isNotPrime[(int)i])
                     numbers.Add(i);
             return numbers.ToArray();
         }
@@ -144,11 +145,11 @@ namespace RSACrypto
         /// натуральное число от n до Int.MaxValue
         /// </param>
         /// <returns>Массив простых чисел на отрезке</returns>
-        public static long[] AllPrimesByCheckingAll(long d, long n)
+        public static MyBigInteger[] AllPrimesByCheckingAll(MyBigInteger d, MyBigInteger n)
         {
-            List<long> numbers = new List<long>();
+            List<MyBigInteger> numbers = new List<MyBigInteger>();
 
-            for (long i = d; i <= n; i++)
+            for (MyBigInteger i = d; i <= n; i++)
             {
                 if (IsPrime(n))
                     numbers.Add(n);
@@ -174,15 +175,15 @@ namespace RSACrypto
         /// Массив чисел, находящихся на данном отрезке,
         /// с определенным количеством делителей
         /// </returns>
-        public static long[] FindNumsWithDividers(long amountOfDividers, long start, long end)
+        public static MyBigInteger[] FindNumsWithDividers(long amountOfDividers, MyBigInteger start, MyBigInteger end)
         {
             if (amountOfDividers == 3)
                 return Dividers.FindNumsWithThreeDividers(start, end);
 
-            List<long> list = new List<long>();
-            for (long k = start; k < end; k++)
+            List<MyBigInteger> list = new List<MyBigInteger>();
+            for (MyBigInteger k = start; k < end; k++)
             {
-                long[] divider = AllDividers(k);
+                MyBigInteger[] divider = AllDividers(k);
                 if (divider.Length == amountOfDividers + 2)
                     list.Add(k);
             }
@@ -203,13 +204,13 @@ namespace RSACrypto
         /// Массив чисел, находящихся на данном отрезке,
         /// с ровно тремя небазовыми делителями
         /// </returns>
-        public static long[] FindNumsWithThreeDividers(long start, long end)
+        public static MyBigInteger[] FindNumsWithThreeDividers(MyBigInteger start, MyBigInteger end)
         {
-            List<long> list = new();
-            foreach (long i in AllPrimes(start, (long)(Math.Sqrt(Math.Sqrt(end))) + 1))
+            List<MyBigInteger> list = new();
+            foreach (MyBigInteger i in AllPrimes(start, (MyBigInteger.Sqrt(MyBigInteger.Sqrt(end))) + 1))
             {
-                long sqare = i * i;
-                long fourth = sqare * sqare;
+                MyBigInteger sqare = i * i;
+                MyBigInteger fourth = sqare * sqare;
                 list.Add(fourth);
             }
             return list.ToArray();

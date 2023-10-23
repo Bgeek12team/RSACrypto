@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RSACrypto.DividersProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -18,15 +19,15 @@ namespace RSACrypto
         /// Константа - общепринятое значение открытой экспоненты,
         /// равное 2^16 + 1
         /// </summary>
-        public const int PUBLIC_EXP = 65537;
+        public readonly MyBigInteger PUBLIC_EXP = new(65537);
         /// <summary>
         /// Простое число p, использующееся для генерации ключей
         /// </summary>
-        private long p;
+        private MyBigInteger p;
         /// <summary>
         /// Простое число q, использующееся для генерации ключей
         /// </summary>
-        private long q;
+        private MyBigInteger q;
         /// <summary>
         /// Конструктор, позволяющий создавать экземпляр данного объекта,
         /// на основе данных значений простых чисел p и q
@@ -37,7 +38,7 @@ namespace RSACrypto
         /// <param name="q">
         /// Простое число q, использующееся для генерации ключей
         /// </param>
-        public RSAKeyGenerator(long p, long q)
+        public RSAKeyGenerator(MyBigInteger p, MyBigInteger q)
         {
             this.p = p;
             this.q = q;
@@ -49,7 +50,7 @@ namespace RSACrypto
         /// Модуль - произведение простых чисел p и q
         /// </returns>
 
-        public long calcModule()
+        public MyBigInteger calcModule()
         {
             return p * q;
         }
@@ -60,7 +61,7 @@ namespace RSACrypto
         /// Значение функции Эйлера - произведение простых чисел,
         /// уменьшенных на единицу
         /// </returns>
-        public long calcEulerFunc()
+        public MyBigInteger calcEulerFunc()
         {
             return (p - 1) * (q - 1);
         }
@@ -69,7 +70,7 @@ namespace RSACrypto
         /// </summary>
         /// <returns>Значение открытой экспоненты</returns>
 
-        public long generatePublicExp()
+        public MyBigInteger generatePublicExp()
         {
             return PUBLIC_EXP;
         }
@@ -77,11 +78,11 @@ namespace RSACrypto
         /// Позволяет получить значение закрытой экспоненты
         /// </summary>
         /// <returns>Значение закрытой экспоненты</returns>
-        public long generatePrivateExp()
+        public MyBigInteger generatePrivateExp()
         {
-            long e = generatePublicExp();
-            long fi = calcEulerFunc();
-            long d = Extendedgcd(e, fi).x;
+            MyBigInteger e = generatePublicExp();
+            MyBigInteger fi = calcEulerFunc();
+            MyBigInteger d = Extendedgcd(e, fi).x;
             if (d < 0)
                 return d + fi;
             else return d;
@@ -97,10 +98,10 @@ namespace RSACrypto
         /// первое число,
         /// второе число
         /// </returns>
-        private (long gcd, long x, long y) Extendedgcd(long a, long b)
+        private (MyBigInteger gcd, MyBigInteger x, MyBigInteger y) Extendedgcd(MyBigInteger a, MyBigInteger b)
         {
-            long gcd, x, y, x1, y1;
-            if (b == 0) return (a, 1, 0);
+            MyBigInteger gcd, x, y, x1, y1;
+            if (b == 0) return (a, new(1), new());
             (gcd, x1, y1) = Extendedgcd(b, a % b);
             x = y1;
             y = x1 - (a / b) * y1;
@@ -157,7 +158,8 @@ namespace RSACrypto
         {
             return
             new Message(
-                Ariphmetics.ModularExp(message.getMessage(),
+                Ariphmetics.ModularExp(
+                    new(message.getMessage()),
                     publicKey.getPublicExp(),
                     publicKey.getN()
                     )
@@ -198,7 +200,7 @@ namespace RSACrypto
             return
                 new Message(
                     Ariphmetics.ModularExp(
-                        encryptedMessage.getMessage(),
+                        new(encryptedMessage.getMessage()),
                         privateKey.getPrivateExp(),
                         privateKey.getN()
                         )
@@ -240,8 +242,8 @@ namespace RSACrypto
 
             foreach (char character in message.ToCharArray())
             {
-                long charValue = (long)character;
-                long encryptedCharValue = Ariphmetics.ModularExp(charValue, publicKey.getPublicExp(), publicKey.getN());
+                MyBigInteger charValue = new((long)character);
+                MyBigInteger encryptedCharValue = Ariphmetics.ModularExp(charValue, publicKey.getPublicExp(), publicKey.getN());
                 encryptedMessage.Append(encryptedCharValue).Append(" ");
             }
 
@@ -286,9 +288,9 @@ namespace RSACrypto
             {
                 if (!string.IsNullOrWhiteSpace(encryptedValue))
                 {
-                    long encryptedCharValue = long.Parse(encryptedValue);
-                    long decryptedCharValue = Ariphmetics.ModularExp(encryptedCharValue, privateKey.getPrivateExp(), privateKey.getN());
-                    char decryptedChar = (char)decryptedCharValue;
+                    MyBigInteger encryptedCharValue = MyBigInteger.Parse(encryptedValue);
+                    MyBigInteger decryptedCharValue = Ariphmetics.ModularExp(encryptedCharValue, privateKey.getPrivateExp(), privateKey.getN());
+                    char decryptedChar = (char)(int)decryptedCharValue;
                     decryptedMessage.Append(decryptedChar);
                 }
             }
@@ -309,14 +311,14 @@ namespace RSACrypto
         /// <summary>
         /// Начало отрезка, на котором мы выбираем простые числа
         /// </summary>
-        const int from = 100;
+        readonly MyBigInteger from = new(100);
         /// <summary>
         /// Конец отрезка, для выбора простых чисел
         /// </summary>
-        const int to = 3000;
+        readonly MyBigInteger to = new(3000);
 
-        long p;
-        long q;
+        MyBigInteger p;
+        MyBigInteger q;
         /// <summary>
         /// Генерация открытого и закрытого ключа
         /// </summary>
