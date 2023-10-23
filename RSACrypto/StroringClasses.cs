@@ -1,4 +1,6 @@
-﻿namespace RSACrypto
+﻿
+
+namespace RSACrypto
 {
     /// <summary>
     /// Класс, предоставляющий возможность хранить одно поле - 
@@ -9,12 +11,12 @@
         /// <summary>
         /// Поле - значение ключа
         /// </summary>
-        private long n;
+        private MyBigInteger n;
         /// <summary>
         /// Конструктор, позволяющий создать экземпляр класса на основе данного значения ключа
         /// </summary>
         /// <param name="n">Значение ключа n </param>
-        public Key(long n)
+        public Key(MyBigInteger n)
         {
             this.n = n;
         }
@@ -22,7 +24,7 @@
         /// Возвращает значение ключа
         /// </summary>
         /// <returns>N - значение ключа</returns>
-        public long getN()
+        public MyBigInteger getN()
         {
             return n;
         }
@@ -48,14 +50,14 @@
         /// <summary>
         /// Значение октрытой экспоненты
         /// </summary>
-        private long publicExp;
+        private MyBigInteger publicExp;
         /// <summary>
         /// Конструктор, позволяющий создать экземпляр класса на основе
         /// данного значения открытой экспоненты и значения ключа n
         /// </summary>
         /// <param name="n">Значение ключа n </param>
         /// <param name="publicExp">Значение открытой экспоненты </param>
-        public PublicKey(long n, long publicExp) : base(n)
+        public PublicKey(MyBigInteger n, MyBigInteger publicExp) : base(n)
         {
             this.publicExp = publicExp;
         }
@@ -64,7 +66,7 @@
         /// данного открытого ключа
         /// </summary>
         /// <returns>Значение открытой экспоненты</returns>
-        public long getPublicExp()
+        public MyBigInteger getPublicExp()
         {
             return this.publicExp;
         }
@@ -90,14 +92,14 @@
         /// <summary>
         /// Значение закрытой экспоненты
         /// </summary>
-        private long privateExp;
+        private MyBigInteger privateExp;
         /// <summary>
         /// Конструктор, позволяющий создать экземпляр класса на основе
         /// данного значения открытой экспоненты и значения ключа n
         /// </summary>
         /// <param name="n">Значение ключа n </param>
         /// <param name="privateExp">Значение закрытой экспоненты </param>
-        public PrivateKey(long n, long privateExp) : base(n)
+        public PrivateKey(MyBigInteger n, MyBigInteger privateExp) : base(n)
         {
             this.privateExp = privateExp;
         }
@@ -106,7 +108,7 @@
         /// данного открытого ключа
         /// </summary>
         /// <returns>Значение открытой экспоненты</returns>
-        public long getPrivateExp()
+        public MyBigInteger getPrivateExp()
         {
             return this.privateExp;
         }
@@ -155,7 +157,7 @@
         /// на основе числа в формате Int32
         /// </summary>
         /// <param name="message">Код символа в формате Int32</param>
-        public Message(int message)
+        public Message(MyBigInteger message)
         {
             this.message = (char)message;
         }

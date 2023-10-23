@@ -39,14 +39,10 @@ namespace ConsoleTest
             // Console.WriteLine("Dec: " + SentSMsg);
 
             CryptoProcessRSA CP = new CryptoProcessRSA(MessageS);
-            Console.WriteLine("Show Message: " + CP.showMsg());
-            Console.WriteLine("Show PrivateKey: " + CP.showPrivateKey());
-            Console.WriteLine("Show PublicKey: " + CP.showPublicKey());
-            Console.WriteLine("Show Encrypt : " + CP.showEncrypt());
-            Console.WriteLine("Show Dencrypt : " + CP.decrypt());
-            Console.WriteLine("Show Dencrypt : " + CP.showDecrypt());
+            MyBigInteger a = new MyBigInteger(12345);
+            MyBigInteger b = new MyBigInteger(54321);
 
-
+            Console.WriteLine(a / 2);
 
         }
     }

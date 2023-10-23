@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,11 @@ namespace RSACrypto
         /// осуществляться возведение в степень
         /// </param>
         /// <returns>Число-результат модульной экспоненциации</returns>
-        public static long ModularExp(long num, long pow, long mod)
+        public static MyBigInteger ModularExp(MyBigInteger num, MyBigInteger pow, MyBigInteger mod)
         {
             if (pow == 0)
-                return 1;
-            long z = ModularExp(num, pow / 2, mod);
+                return new(1);
+            MyBigInteger z = ModularExp(num, pow / 2, mod);
             if (pow % 2 == 0)
                 return (z * z) % mod;
             else
@@ -47,10 +48,10 @@ namespace RSACrypto
         /// Число - конец диапозона, в котором осуществляется генерация
         /// </param>
         /// <returns>Случайное простое число в данном диапозоне</returns>
-        public static long generatePrimeNumber(long from, long until)
+        public static MyBigInteger generatePrimeNumber(MyBigInteger from, MyBigInteger until)
         {
             Random random = new Random();
-            long[] primes = Dividers.AllPrimes((long)from, (long)until);
+            MyBigInteger[] primes = Dividers.AllPrimes(from, until);
             return primes[random.Next(primes.Length)];
         }
     }
