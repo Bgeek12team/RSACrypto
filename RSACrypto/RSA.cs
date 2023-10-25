@@ -314,11 +314,11 @@ namespace RSACrypto
         /// <summary>
         /// Начало отрезка, на котором мы выбираем простые числа
         /// </summary>
-        readonly MyBigInteger from = new(10);
+        readonly MyBigInteger from = new(1000000);
         /// <summary>
         /// Конец отрезка, для выбора простых чисел
         /// </summary>
-        readonly MyBigInteger to = new(20);
+        readonly MyBigInteger to = new(3000000);
 
         MyBigInteger p;
         MyBigInteger q;

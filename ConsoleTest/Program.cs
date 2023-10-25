@@ -39,10 +39,10 @@ namespace ConsoleTest
             // Console.WriteLine("Dec: " + SentSMsg);
 
             CryptoProcessRSA CP = new CryptoProcessRSA(MessageS);
-            MyBigInteger a = new MyBigInteger(12345);
-            MyBigInteger b = new MyBigInteger(54321);
+            MyBigInteger a = new MyBigInteger("8748937912341234142431323213212141212");
+            MyBigInteger b = new MyBigInteger("174312341321132132243123");
 
-            Console.WriteLine(a / 2);
+            Console.WriteLine(a % b);
 
         }
     }

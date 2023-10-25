@@ -353,12 +353,7 @@ namespace RSACrypto
             /// <returns>Остаток от деления текущего числа на данное</returns>
             public MyBigInteger Mod(MyBigInteger second)
             {
-                MyBigInteger result = this;
-                while (result.CompareTo(second) >= 0)
-                {
-                    result -= second;
-                }
-                return result;
+                return this - second * (this / second);
             }
             /// <summary>
             /// Метод, позволяющий возвести текущее число в степень данного
@@ -871,6 +866,14 @@ namespace RSACrypto
             public static explicit operator int(MyBigInteger n)
             {
                 return int.Parse(n.ToString());
+            }
+            /// <summary>
+            /// Преобразует число типа MyBigInteger в число типа int
+            /// </summary>
+            /// <param name="n">преобразуемое число</param>
+            public static explicit operator long(MyBigInteger n)
+            {
+                return long.Parse(n.ToString());
             }
             /// <summary>
             /// Метод, который проверяет является ли введенная строка нулём

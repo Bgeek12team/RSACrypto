@@ -117,7 +117,7 @@ namespace RSACrypto
         public static MyBigInteger[] AllPrimes(MyBigInteger d, MyBigInteger n)
         {
             List<MyBigInteger> numbers = new List<MyBigInteger>();
-            bool[] isNotPrime = new bool[(int)n + 1];
+            bool[] isNotPrime = new bool[(long)n + 1];
             for (int j = 2; j * j <= n; j++)
             {
                 if (!isNotPrime[j])
